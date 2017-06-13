@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <div id="content">
+        <input type="text" name="content" required placeholder="POST"><br>
+    </div>
+    <input type="submit" value="POST请求" id="POST">
+</body>
+
+</html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    $('#POST').click(function() {
+        $.ajax({
+            method: 'POST',
+            url: '/post',
+            data: {
+                name: $('#content').find('[name="content"]').val()
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success((data) => {
+            if (data == 'POST') {
+                window.location.href = '/post'
+            }
+        }).error((err) => {
+            console.log(err)
+        })
+    })
+</script>
